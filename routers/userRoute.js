@@ -8,11 +8,7 @@ router.post('/register', register)
 
 // Login Route
 // localhost:4000/api/users/login
-router.post('/login', (req, res) => {
-    res.json({
-        message: "hello thank you."
-    })
-})
+router.post('/login', login)
 router.get('/all', allUser)
 
 module.exports = router
