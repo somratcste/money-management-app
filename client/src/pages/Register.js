@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-// import { register } from "../store/actions/authActions";
+import { register } from "../store/actions/authActions";
 
 class Register extends React.Component {
     state = {
@@ -12,16 +12,16 @@ class Register extends React.Component {
         error: {}
     };
 
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     if (
-    //         JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)
-    //     ) {
-    //         return {
-    //             error: nextProps.auth.error
-    //         };
-    //     }
-    //     return null;
-    // }
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (
+            JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)
+        ) {
+            return {
+                error: nextProps.auth.error
+            };
+        }
+        return null;
+    }
 
     changeHandler = event => {
         this.setState({
@@ -32,10 +32,10 @@ class Register extends React.Component {
     submitHandler = event => {
         event.preventDefault();
         let { name, email, password, confirmPassword } = this.state;
-        // this.props.register(
-        //     { name, email, password, confirmPassword },
-        //     this.props.history
-        // );
+        this.props.register(
+            { name, email, password, confirmPassword },
+            this.props.history
+        );
     };
 
     render() {
@@ -124,13 +124,8 @@ class Register extends React.Component {
     }
 }
 
-// const mapStateToProps = state => ({
-//     auth: state.auth
-// });
-//
-// export default connect(
-//     mapStateToProps,
-//     { register }
-// )(Register);
+const mapStateToProps = state => ({
+    auth: state.auth
+});
 
-export default Register
+export default connect(mapStateToProps, { register })(Register);
