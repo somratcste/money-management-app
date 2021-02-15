@@ -6,12 +6,12 @@ import * as Types from './types'
 export const register = (user, history) => dispatch => {
     Axios.post('/api/users/register', user)
         .then((res) => {
-            // dispatch({
-            //     type: Types.USERS_ERROR,
-            //     payload: {
-            //         error: {}
-            //     }
-            // })
+            dispatch({
+                type: Types.USERS_ERROR,
+                payload: {
+                    error: {}
+                }
+            })
             console.log(res)
             history.push('/login')
         })
