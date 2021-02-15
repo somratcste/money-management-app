@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-// import {login} from '../store/actions/authActions'
+import {login} from '../store/actions/authActions'
 
 class Login extends React.Component {
     state = {
@@ -10,16 +10,16 @@ class Login extends React.Component {
         error: {}
     }
 
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     if (
-    //         JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)
-    //     ) {
-    //         return {
-    //             error: nextProps.auth.error
-    //         };
-    //     }
-    //     return null;
-    // }
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (
+            JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)
+        ) {
+            return {
+                error: nextProps.auth.error
+            };
+        }
+        return null;
+    }
 
     changeHandler = event => {
         this.setState({
@@ -29,10 +29,10 @@ class Login extends React.Component {
 
     submitHandler = event => {
         event.preventDefault()
-        // this.props.login({
-        //     email: this.state.email,
-        //     password: this.state.password
-        // }, this.props.history)
+        this.props.login({
+            email: this.state.email,
+            password: this.state.password
+        }, this.props.history)
     }
 
     render() {
@@ -89,5 +89,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-// export default connect(mapStateToProps, {login})(Login)
-export default Login
+export default connect(mapStateToProps, {login})(Login)
